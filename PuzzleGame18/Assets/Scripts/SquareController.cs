@@ -20,12 +20,20 @@ public class SquareController : MonoBehaviour
 
     public void MoveTo(int posX, int posY)
     {
+        GridController OldGridController = GameObject.FindGameObjectWithTag("Grid").GetComponent<GridController>();
+        GameObject OldGridPos = OldGridController.getPosObject(posX, posY);
+        GridPosController OldGridPosController = OldGridPos.GetComponent<GridPosController>();
+        OldGridPosController.setCurrentSquare(null);
+
+
         currentPosX = posX;
         currentPosY = posY;
         GridController gridController = GameObject.FindGameObjectWithTag("Grid").GetComponent<GridController>();
         GameObject gridPos = gridController.getPosObject(posX, posY);
         gameObject.transform.position = gridPos.transform.position; // move the object to the specified position on the grid
         gameObject.transform.position = new Vector3(transform.position.x, transform.position.y, -1);
+        GridPosController gridPosController = gridPos.GetComponent<GridPosController>();
+        gridPosController.setCurrentSquare(gameObject);
     }
 
     private void OnMouseDown()

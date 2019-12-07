@@ -7,7 +7,8 @@ public class GridPosController : MonoBehaviour
     // Start is called before the first frame update
     public int positionX;
     public int positionY;
-    void Start()
+    public GameObject currentSquare;
+    void Awake()
     {
         GridController gridController = GameObject.FindGameObjectWithTag("Grid").GetComponent<GridController>();
         gridController.SetPositionOnGrid(positionX, positionY, gameObject); //set the position of the gridPos object on the grid
@@ -24,5 +25,8 @@ public class GridPosController : MonoBehaviour
         playerController.setSelectedPos(gameObject);
     }
 
-    
+    public void setCurrentSquare(GameObject newSquare)
+    {
+        currentSquare = newSquare;
+    }
 }
