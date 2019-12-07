@@ -26,6 +26,7 @@ public class SpawnController : MonoBehaviour
         //Vector3 gridPosVect = new Vector3(gridPos.transform.position.x, gridPos.transform.position.y, -1);
         GameObject newSquare = Instantiate(squareObject);
         newSquare.GetComponent<SquareController>().MoveTo(posX, posY);
+        newSquare.GetComponent<SquareController>().lockInDesiredPosition();
     }
 
     public void SpawnRandomObject()
@@ -37,4 +38,5 @@ public class SpawnController : MonoBehaviour
         int posY = randGridPosController.positionY;
         spawnSquareAtLocation(squareObject, posX, posY);
     }
+
 }

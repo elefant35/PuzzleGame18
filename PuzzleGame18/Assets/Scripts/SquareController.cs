@@ -6,6 +6,9 @@ public class SquareController : MonoBehaviour
 {
     public int currentPosX;
     public int currentPosY;
+
+    public int desiredPositionX;
+    public int desiredPositionY;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +24,7 @@ public class SquareController : MonoBehaviour
     public void MoveTo(int posX, int posY)
     {
         GridController OldGridController = GameObject.FindGameObjectWithTag("Grid").GetComponent<GridController>();
-        GameObject OldGridPos = OldGridController.getPosObject(posX, posY);
+        GameObject OldGridPos = OldGridController.getPosObject(currentPosX, currentPosY);
         GridPosController OldGridPosController = OldGridPos.GetComponent<GridPosController>();
         OldGridPosController.setCurrentSquare(null);
 
@@ -40,5 +43,19 @@ public class SquareController : MonoBehaviour
     {
         PlayerController playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         playerController.setSelectedObject(gameObject);
+    }
+
+    public void lockInDesiredPosition()
+    {
+        desiredPositionX = currentPosX;
+        desiredPositionY = currentPosY;
+    }
+    public bool IsPositionCorrect()
+    {
+        if (currentPosX == desiredPositionX && currentPosY == desiredPositionY)
+        {
+            return true;
+        }
+        else return false;
     }
 }
