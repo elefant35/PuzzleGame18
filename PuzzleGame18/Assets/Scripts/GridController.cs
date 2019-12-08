@@ -94,7 +94,7 @@ public class GridController : MonoBehaviour
                     if (!squareController.IsPositionCorrect())
                     {
                         numIncorrect++;
-                    }                  
+                    }
                 }
             }
         }
@@ -120,5 +120,48 @@ public class GridController : MonoBehaviour
         }
         Debug.Log("Number incorrect:" + numIncorrect);
         return incorrectArray;
+    }
+    public void ShuffleObjects()
+    {
+        int numberOfSquares = 0;
+        for (int x = 0; x < 5; x++)
+        {
+            for (int y = 0; y < 5; y++)
+            {
+                GameObject objectpos = gridArray[x][y];
+                GridPosController gridPosController = objectpos.GetComponent<GridPosController>();
+                Debug.Log("Position:" + gridPosController.positionX + "," + gridPosController.positionY);
+                if (gridPosController.currentSquare != null)
+                {
+                    numberOfSquares++;
+                }
+            }
+        }
+        GameObject[] ArrayOfSquares = new GameObject[numberOfSquares];
+        int i = 0;
+        for (int x = 0; x < 5; x++)
+        {
+            for (int y = 0; y < 5; y++)
+            {
+                GameObject objectpos = gridArray[x][y];
+                GridPosController gridPosController = objectpos.GetComponent<GridPosController>();
+                Debug.Log("Position:" + gridPosController.positionX + "," + gridPosController.positionY);
+                if (gridPosController.currentSquare != null)
+                {
+
+                    ArrayOfSquares[i] = gridPosController.currentSquare;
+                    i++;
+                }
+            }
+        }
+
+        for (int n = 0; n < i; n++)
+        {
+            GameObject objectPos = returnRandomObjectPos();
+            GridPosController gridPosController = objectPos.GetComponent<GridPosController>();
+            SquareController squareController =  ArrayOfSquares[n].GetComponent<SquareController>();
+            squareController.MoveTo(gridPosController.positionX, gridPosController.positionY);
+        }
+
     }
 }
