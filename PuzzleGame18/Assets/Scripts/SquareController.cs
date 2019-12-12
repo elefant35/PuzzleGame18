@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class SquareController : MonoBehaviour
 {
-    public int currentPosX;
-    public int currentPosY;
+    public int currentPosX = -1;
+    public int currentPosY = -1;
 
     public int desiredPositionX;
     public int desiredPositionY;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        //Debug.Log("CurrentPosX at awake:" + currentPosX);
+        currentPosY = -1;
+        currentPosX = -1;
     }
 
     // Update is called once per frame
@@ -23,10 +25,15 @@ public class SquareController : MonoBehaviour
 
     public void MoveTo(int posX, int posY)
     {
-        GridController OldGridController = GameObject.FindGameObjectWithTag("Grid").GetComponent<GridController>();
-        GameObject OldGridPos = OldGridController.getPosObject(currentPosX, currentPosY);
-        GridPosController OldGridPosController = OldGridPos.GetComponent<GridPosController>();
-        OldGridPosController.setCurrentSquare(null);
+        //Debug.Log("currentPosX at time of move:" + currentPosX + " CurrentPosY at time of move:" + currentPosY);
+        if (currentPosX != -1 || currentPosY != -1)
+        {
+            //Debug.Log("section added to deal with old position called");
+            GridController OldGridController = GameObject.FindGameObjectWithTag("Grid").GetComponent<GridController>();
+            GameObject OldGridPos = OldGridController.getPosObject(currentPosX, currentPosY);
+            GridPosController OldGridPosController = OldGridPos.GetComponent<GridPosController>();
+            OldGridPosController.setCurrentSquare(null);
+        }
 
 
         currentPosX = posX;

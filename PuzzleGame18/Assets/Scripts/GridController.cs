@@ -26,7 +26,7 @@ public class GridController : MonoBehaviour
     void Update()
     {
         testObject = gridArray[3][3];
-        returnIncorrectPositions();
+        //returnIncorrectPositions();
     }
 
     public void SetPositionOnGrid(int posX, int posY, GameObject gridPos)
@@ -41,7 +41,7 @@ public class GridController : MonoBehaviour
 
     public GameObject returnRandomObjectPos()
     {
-        int randomArrayLength = 0;
+        int randomArrayLength = 0; //changed from 0 for a test
         for(int x = 0; x<5; x++)
         {
             for (int y = 0; y<5; y++)
@@ -52,30 +52,34 @@ public class GridController : MonoBehaviour
                 if(gridPosController.currentSquare == null)
                 {
                     randomArrayLength++;
+                    Debug.Log(x + "," + y + " is empty");
                 }
             }
-        }
-        GameObject[] randomArray = new GameObject[randomArrayLength];
-        int i = 0;
-        for (int x = 0; x < 5; x++)
+        } if (randomArrayLength > 0)
         {
-            for (int y = 0; y < 5; y++)
+            GameObject[] randomArray = new GameObject[randomArrayLength];
+            int i = 0;
+            for (int x = 0; x < 5; x++)
             {
-                GameObject objectpos = gridArray[x][y];
-                GridPosController gridPosController = objectpos.GetComponent<GridPosController>();
-                //Debug.Log("Position:" + gridPosController.positionX + "," + gridPosController.positionY);
-                if (gridPosController.currentSquare == null)
+                for (int y = 0; y < 5; y++)
                 {
-                    randomArray[i] = objectpos;
-                    i++;
+                    GameObject objectpos = gridArray[x][y];
+                    GridPosController gridPosController = objectpos.GetComponent<GridPosController>();
+                    //Debug.Log("Position:" + gridPosController.positionX + "," + gridPosController.positionY);
+                    if (gridPosController.currentSquare == null)
+                    {
+                        randomArray[i] = objectpos;
+                        i++;
+                    }
                 }
             }
+            int randomArrayPos = Random.Range(0, randomArrayLength -1);
+            GameObject randomObject = randomArray[randomArrayPos];
+            GridPosController randomGridPosController = randomObject.GetComponent<GridPosController>();
+            //Debug.Log("Random Object Pos" + randomGridPosController.positionX + "," + randomGridPosController.positionY);
+            return randomObject;
         }
-        int randomArrayPos = Random.Range(0, randomArrayLength-1);
-        GameObject randomObject = randomArray[randomArrayPos];
-        GridPosController randomGridPosController = randomObject.GetComponent<GridPosController>();
-        //Debug.Log("Random Object Pos" + randomGridPosController.positionX + "," + randomGridPosController.positionY);
-        return randomObject;
+        else return null;
     }
 
     public GameObject[] returnIncorrectPositions()
@@ -87,7 +91,7 @@ public class GridController : MonoBehaviour
             {
                 GameObject objectpos = gridArray[x][y];
                 GridPosController gridPosController = objectpos.GetComponent<GridPosController>();
-                Debug.Log("Position:" + gridPosController.positionX + "," + gridPosController.positionY);
+                //Debug.Log("Position:" + gridPosController.positionX + "," + gridPosController.positionY);
                 if (gridPosController.currentSquare != null)
                 {
                     SquareController squareController = gridPosController.currentSquare.GetComponent<SquareController>();
@@ -106,7 +110,7 @@ public class GridController : MonoBehaviour
             {
                 GameObject objectpos = gridArray[x][y];
                 GridPosController gridPosController = objectpos.GetComponent<GridPosController>();
-                Debug.Log("Position:" + gridPosController.positionX + "," + gridPosController.positionY);
+                //Debug.Log("Position:" + gridPosController.positionX + "," + gridPosController.positionY);
                 if (gridPosController.currentSquare != null)
                 {
                     SquareController squareController = gridPosController.currentSquare.GetComponent<SquareController>();
@@ -130,7 +134,7 @@ public class GridController : MonoBehaviour
             {
                 GameObject objectpos = gridArray[x][y];
                 GridPosController gridPosController = objectpos.GetComponent<GridPosController>();
-                Debug.Log("Position:" + gridPosController.positionX + "," + gridPosController.positionY);
+                //Debug.Log("Position:" + gridPosController.positionX + "," + gridPosController.positionY);
                 if (gridPosController.currentSquare != null)
                 {
                     numberOfSquares++;
@@ -145,7 +149,7 @@ public class GridController : MonoBehaviour
             {
                 GameObject objectpos = gridArray[x][y];
                 GridPosController gridPosController = objectpos.GetComponent<GridPosController>();
-                Debug.Log("Position:" + gridPosController.positionX + "," + gridPosController.positionY);
+                //Debug.Log("Position:" + gridPosController.positionX + "," + gridPosController.positionY);
                 if (gridPosController.currentSquare != null)
                 {
 
