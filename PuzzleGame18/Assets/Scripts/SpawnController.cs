@@ -11,10 +11,6 @@ public class SpawnController : MonoBehaviour
     void Start()
     {
         SpawnRandomObject();
-        SpawnRandomObject();
-        SpawnRandomObject();
-        SpawnRandomObject();
-        SpawnRandomObject();
     }
 
     // Update is called once per frame
