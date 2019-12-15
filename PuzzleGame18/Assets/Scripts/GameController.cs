@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -76,6 +77,7 @@ public class GameController : MonoBehaviour
         else
         {
             //game over
+            SceneManager.LoadScene("GameOver");
             redX.enabled = true;
         }
     }
